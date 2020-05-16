@@ -1,0 +1,44 @@
+###############################################################################
+#                          Generated on phpdocker.io                          #
+###############################################################################
+version: "3.1"
+services:
+    mysql:
+      image: mysql:5.7.23
+      restart: always
+      environment:
+        MYSQL_DATABASE: 'db'
+        # So you don't have to use root, but you can if you like
+        MYSQL_USER: 'user'
+        # You can use whatever password you like
+        MYSQL_PASSWORD: 'password'
+        # Password for root access
+        MYSQL_ROOT_PASSWORD: 'password'
+      ports:
+        # <Port exposed> : < MySQL Port running inside container>
+        - '3306:3306'
+      expose:
+        # Opens port 3306 on the container
+        - '3306'
+        # Where our data will be persisted
+      volumes:
+        - my-datavolume:/phpdocker/mysql/data
+    webserver:
+      image: nginx:alpine
+      container_name: mauqatest-webserver
+      working_dir: /application
+      volumes:
+          - .:/application
+          - ./phpdocker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+      ports:
+       - "8080:80"
+
+    php-fpm:
+      build: phpdocker/php-fpm
+      container_name: mauqatest-php-fpm
+      working_dir: /application
+      volumes:
+        - .:/application
+        - ./phpdocker/php-fpm/php-ini-overrides.ini:/etc/php/7.4/fpm/conf.d/99-overrides.ini
+volumes:
+  my-datavolume:
