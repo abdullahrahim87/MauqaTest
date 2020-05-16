@@ -27,6 +27,7 @@ $factory->define(App\Film::class, function (Faker\Generator $faker) {
         'rating' => $faker->randomFloat(2, 1, 5),
         'photo' => "thumb.png",
         'country' => $faker->country,
+        'slug' => $faker->firstName,
         'ticket_price' => $faker->randomFloat(2, 90, 100)
     ];
 });

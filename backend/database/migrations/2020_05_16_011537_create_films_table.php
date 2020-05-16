@@ -22,6 +22,7 @@ class CreateFilmsTable extends Migration
             $table->float('ticket_price', 8, 2);
             $table->string('country');
             $table->string('photo');
+            $table->string('slug');
             $table->timestamps();
         });
     }
