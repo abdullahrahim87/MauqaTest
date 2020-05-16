@@ -18,3 +18,28 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'password' =>app('hash')->make('click123'),
     ];
 });
+
+$factory->define(App\Film::class, function (Faker\Generator $faker) {
+    return [
+        'name'     => $faker->title,
+        'description'    => $faker->paragraph,
+        'release_date' => $faker->dateTime,
+        'rating' => $faker->randomFloat(2, 1, 5),
+        'photo' => "thumb.png",
+        'country' => $faker->country,
+        'ticket_price' => $faker->randomFloat(2, 90, 100)
+    ];
+});
+
+$factory->define(App\Comment::class, function (Faker\Generator $faker) {
+    return [
+        'name'     => $faker->name,
+        'comment'    => $faker->paragraph,
+    ];
+});
+
+$factory->define(App\Genre::class, function (Faker\Generator $faker) {
+    return [
+        'title'     => $faker->name,
+    ];
+});

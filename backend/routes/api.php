@@ -13,7 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-
 Route::group([
     'prefix' => '/auth'
 ], function ($router) {
@@ -22,5 +21,10 @@ Route::group([
     Route::post('logout', 'AuthController@logout');
     Route::post('refresh', 'AuthController@refresh');
     Route::post('me', 'AuthController@me');
+});
+
+Route::group(['middleware' => 'api'], function()
+{
+    Route::resource('films', 'FilmController');
 });
 
